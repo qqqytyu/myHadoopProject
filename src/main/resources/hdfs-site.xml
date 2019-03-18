@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+  <!--指定block块副本个数-->
+  <property>
+    <name>dfs.replication</name>
+    <value>3</value>
+  </property>
+
+  <!--设置HDFS服务的逻辑名称-->
+  <property>
+    <name>dfs.nameservices</name>
+    <value>mycluster</value>
+  </property>
+
+  <!--设置HDFS对应逻辑名称下的节点名称-->
+  <property>
+    <name>dfs.ha.namenodes.mycluster</name>
+    <value>nn1,nn2,nn3</value>
+  </property>
+
+  <!--设置对应节点的RPC通信实际地址与端口-->
+  <property>
+    <name>dfs.namenode.rpc-address.mycluster.nn1</name>
+    <value>node001:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.mycluster.nn2</name>
+    <value>node002:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.mycluster.nn3</name>
+    <value>node003:8020</value>
+  </property>
+
+  <!--设置对应节点的http通信实际地址与端口-->
+  <property>
+    <name>dfs.namenode.http-address.mycluster.nn1</name>
+    <value>node001:9870</value>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address.mycluster.nn2</name>
+    <value>node002:9870</value>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address.mycluster.nn3</name>
+    <value>node003:9870</value>
+  </property>
+
+  <!--设置HDFS HA模式的JournalNode组,用分号分隔;mycluster为journalid-->
+  <property>
+    <name>dfs.namenode.shared.edits.dir</name>
+    <value>qjournal://node001:8485;node002:8485;node003:8485/mycluster</value>
+  </property>
+
+  <!--设置HDFS Client以什么方式寻找到active的NameNode-->
+  <property>
+    <name>dfs.client.failover.proxy.provider.mycluster</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+  <!--设置围栏机制，指定HDFS以什么方式启动围栏机制-->
+  <property>
+    <name>dfs.ha.fencing.methods</name>
+    <value>sshfence</value>
+  </property>
+
+  <!--如果围栏机制指定的是SSH登录，需要以下配置指定SSH私钥位置-->
+  <property>
+    <name>dfs.ha.fencing.ssh.private-key-files</name>
+    <value>/root/.ssh/id_dsa</value>
+  </property>
+
+  <!--配置启用HDFS HA模式NameNode自动切换-->
+  <property>
+    <name>dfs.ha.automatic-failover.enabled</name>
+    <value>true</value>
+  </property>
+
+  <!--指定journalnode的edits文件存放位置-->
+  <property>
+    <name>dfs.journalnode.edits.dir</name>
+    <value>/var/bjsxt/hadoop/ha/jnnedits</value>
+  </property>
+
+</configuration>
