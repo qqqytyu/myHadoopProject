@@ -3,6 +3,9 @@ package lll.hadoop.hbase;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.*;
 import org.apache.hadoop.hbase.client.*;
+import org.apache.hadoop.hbase.filter.CompareFilter;
+import org.apache.hadoop.hbase.filter.FilterList;
+import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.junit.After;
 import org.junit.Before;
@@ -164,6 +167,7 @@ public class hbaseTest {
 
         Table table = conn.getTable(TableName.valueOf("lll:lll_table"));
 
+        //创建一个scan操作实例
         Scan scan = new Scan();
 
         //设置扫表的起始、结束rowkey，不设置的话就扫全表，包含起始不包含结束
@@ -175,19 +179,43 @@ public class hbaseTest {
 
         ResultScanner rss = table.getScanner(scan);
 
-        for(Result rs : rss){
-
-            Cell cell01 = rs.getColumnLatestCell("cf01".getBytes(),"name".getBytes());
-            Cell cell02 = rs.getColumnLatestCell("cf01".getBytes(),"sex".getBytes());
-
-            System.out.println(Bytes.toString(CellUtil.cloneValue(cell01)));
-            System.out.println(Bytes.toString(CellUtil.cloneValue(cell02)));
-
-        }
+        printRs(rss);
 
         rss.close();
         table.close();
 
+    }
+
+    /**
+     * Hbase 过滤器
+     */
+    @Test
+    public void filter() throws IOException {
+
+        Table table = conn.getTable(TableName.valueOf("lll:lll_table"));
+        Scan scan = new Scan();
+        //创建一个过滤器组，MUST_PASS_ALL是所有条件都要满足，MUST_PASS_ONE是只要满足一个
+        FilterList fls = new FilterList(FilterList.Operator.MUST_PASS_ALL);
+        //创建一个过滤器
+        SingleColumnValueFilter scf = new SingleColumnValueFilter("cf01".getBytes(), "age".getBytes(), CompareFilter.CompareOp.EQUAL, "18".getBytes());
+        //将过滤器添加到过滤器组
+        fls.addFilter(scf);
+        //对scan设置过滤器
+        scan.setFilter(fls);
+        ResultScanner rss = table.getScanner(scan);
+        printRs(rss);
+        rss.close();
+        table.close();
+
+    }
+
+    private void printRs(ResultScanner rss){
+        for(Result rs : rss){
+            Cell cell01 = rs.getColumnLatestCell("cf01".getBytes(),"name".getBytes());
+            Cell cell02 = rs.getColumnLatestCell("cf01".getBytes(),"sex".getBytes());
+            System.out.println(Bytes.toString(CellUtil.cloneValue(cell01)));
+            System.out.println(Bytes.toString(CellUtil.cloneValue(cell02)));
+        }
     }
 
 }
