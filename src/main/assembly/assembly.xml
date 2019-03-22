@@ -29,7 +29,15 @@
             <unpack>true</unpack>
             <!--指定要包含的依赖-->
             <includes>
-                <include>com.hankcs:hanlp</include>
+                <include>org.apache.hbase:hbase-client</include>
+                <include>org.apache.hbase:hbase-common</include>
+                <include>org.apache.hbase:hbase-mapreduce</include>
+                <include>org.apache.hbase:hbase-protocol</include>
+                <include>org.apache.hbase:hbase-protocol-shaded</include>
+                <include>org.apache.hbase.thirdparty:hbase-shaded-miscellaneous</include>
+                <include>org.apache.hbase.thirdparty:hbase-shaded-protobuf</include>
+                <include>org.apache.hbase.thirdparty:hbase-shaded-netty</include>
+                <include>org.apache.commons:commons-lang3</include>
             </includes>
             <!--打包的目标路径-->
             <outputDirectory>/</outputDirectory>
