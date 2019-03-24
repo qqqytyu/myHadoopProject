@@ -28,17 +28,13 @@
             <!--将添加进来的依赖解压-->
             <unpack>true</unpack>
             <!--指定要包含的依赖-->
-            <includes>
-                <include>org.apache.hbase:hbase-client</include>
-                <include>org.apache.hbase:hbase-common</include>
-                <include>org.apache.hbase:hbase-mapreduce</include>
-                <include>org.apache.hbase:hbase-protocol</include>
-                <include>org.apache.hbase:hbase-protocol-shaded</include>
-                <include>org.apache.hbase.thirdparty:hbase-shaded-miscellaneous</include>
-                <include>org.apache.hbase.thirdparty:hbase-shaded-protobuf</include>
-                <include>org.apache.hbase.thirdparty:hbase-shaded-netty</include>
-                <include>org.apache.commons:commons-lang3</include>
-            </includes>
+            <excludes>
+                <exclude>org.apache.hadoop:hadoop-common</exclude>
+                <exclude>org.apache.hadoop:hadoop-client</exclude>
+                <exclude>org.apache.hadoop:hadoop-hdfs</exclude>
+                <exclude>org.apache.hadoop:hadoop-mapreduce-client-core</exclude>
+                <exclude>com.hankcs:hanlp</exclude>
+            </excludes>
             <!--打包的目标路径-->
             <outputDirectory>/</outputDirectory>
         </dependencySet>
