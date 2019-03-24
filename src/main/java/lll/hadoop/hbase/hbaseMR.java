@@ -22,9 +22,13 @@ public class hbaseMR {
 
         Configuration conf = new Configuration(true);
 
-        conf.set("mapreduce.app-submission.cross-platform", "true");
+//        conf.set("mapreduce.app-submission.cross-platform", "true");
 
-        conf.set("mapreduce.job.jar", "E:\\IDEA_GitHub\\myHadoop\\target\\lll_hadoop_test.jar");
+//        conf.set("mapreduce.job.jar", "D:\\IDEA_MAVEN_CODE\\myProject\\target\\lll_hadoop_test.jar");
+
+//        conf.set("mapreduce.framework.name", "local");
+//
+//        conf.set("mapreduce.cluster.local.dir", "D:\\tmp");
 
         conf.set("hbase.zookeeper.quorum","node002,node003,node004");
 
@@ -36,11 +40,11 @@ public class hbaseMR {
 
         job.setJobName("hbase mr");
 
-        FileInputFormat.addInputPath(job, new Path("/user/lll/wc.txt"));
+        FileInputFormat.addInputPath(job, new Path(args[0]));
 
         job.setMapperClass(hbaseMRmapper.class);
 
-        TableMapReduceUtil.initTableReducerJob("lll:wc", hbaseMRreduce.class, job, null, null, null, null, false);
+        TableMapReduceUtil.initTableReducerJob(args[1], hbaseMRreduce.class, job, null, null, null, null, false);
 
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
@@ -71,16 +75,18 @@ class hbaseMRreduce extends TableReducer<Text, IntWritable,ImmutableBytesWritabl
     @Override
     protected void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 
-        int num = 100;
+        int num = 0;
 
-//        for(IntWritable iw : values)
-//            num += iw.get();
+        for(IntWritable iw : values)
+            num += iw.get();
 
         Put put = new Put(key.toString().getBytes());
 
-        put.addColumn("cf01".getBytes(),"number".getBytes(),String.valueOf(num).getBytes());
+        put.addColumn("cf".getBytes(),"number".getBytes(),String.valueOf(num).getBytes());
 
         context.write(new ImmutableBytesWritable(key.toString().getBytes()),put);
+
+        System.out.println(key.toString() + ":" + num);
 
     }
 }
