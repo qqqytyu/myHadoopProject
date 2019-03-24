@@ -11,7 +11,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hadoop.version>2.8.5</hadoop.version>
-        <hbase.version>2.0.4</hbase.version>
+        <hbase.version>1.2.9</hbase.version>
     </properties>
 
     <dependencies>
@@ -47,53 +47,100 @@
         </dependency>
 
         <!--HBASE-->
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-client -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-annotations</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-client</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-common -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-common</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-mapreduce -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-mapreduce</artifactId>
+            <artifactId>hbase-examples</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-protocol-shaded -->
         <dependency>
             <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-protocol-shaded</artifactId>
+            <artifactId>hbase-external-blockcache</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase/hbase-protocol -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-hadoop2-compat</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-hadoop-compat</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-it</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-prefix-tree</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-procedure</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-protocol</artifactId>
             <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase.thirdparty/hbase-shaded-miscellaneous -->
         <dependency>
-            <groupId>org.apache.hbase.thirdparty</groupId>
-            <artifactId>hbase-shaded-miscellaneous</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-resource-bundle</artifactId>
+            <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase.thirdparty/hbase-shaded-protobuf -->
         <dependency>
-            <groupId>org.apache.hbase.thirdparty</groupId>
-            <artifactId>hbase-shaded-protobuf</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-rest</artifactId>
+            <version>${hbase.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.hbase.thirdparty/hbase-shaded-netty -->
         <dependency>
-            <groupId>org.apache.hbase.thirdparty</groupId>
-            <artifactId>hbase-shaded-netty</artifactId>
-            <version>2.0.0</version>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-shell</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-thrift</artifactId>
+            <version>${hbase.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.htrace</groupId>
+            <artifactId>htrace-core</artifactId>
+            <version>3.1.0-incubating</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yammer.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.0.50.Final</version>
         </dependency>
         <!--HBASE END-->
 
@@ -103,8 +150,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.8.1</version>
         </dependency>
-
-
 
     </dependencies>
 
